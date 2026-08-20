@@ -99,10 +99,10 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               <Zap className="w-4 h-4" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f1f5f9' }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 Live Risk Sandbox & Custom Inspector
               </h2>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                 Adjust variables in real-time to test linear attribution & counterfactual bounds
               </p>
             </div>
@@ -110,7 +110,7 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               background: 'none',
               border: 'none',
@@ -123,7 +123,7 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
 
         {/* Quick Presets */}
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>Quick Presets:</span>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600 }}>Quick Presets:</span>
           <button
             type="button"
             className="btn btn-secondary"
@@ -146,8 +146,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
           {/* Section 1: Transaction Basics */}
           <div
             style={{
-              background: 'rgba(15,23,42,0.6)',
-              border: '1px solid rgba(148,163,184,0.1)',
+              background: 'var(--bg-surface-elevated)',
+              border: '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '0.875rem',
               display: 'flex',
@@ -158,8 +158,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
             <div className="narrative-label">Transaction Parameters</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Amount (₹): <span className="mono" style={{ color: '#60a5fa', fontWeight: 700 }}>₹{Number(formData.amount).toLocaleString('en-IN')}</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Amount (₹): <span className="mono" style={{ color: 'var(--primary-500)', fontWeight: 700 }}>₹{Number(formData.amount).toLocaleString('en-IN')}</span>
                 </label>
                 <input
                   type="range"
@@ -173,8 +173,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               </div>
 
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Hour of Day: <span className="mono" style={{ color: '#60a5fa', fontWeight: 700 }}>{formData.hour}:00</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Hour of Day: <span className="mono" style={{ color: 'var(--primary-500)', fontWeight: 700 }}>{formData.hour}:00</span>
                 </label>
                 <input
                   type="range"
@@ -191,8 +191,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
           {/* Section 2: Historical Profile (Immutable Features) */}
           <div
             style={{
-              background: 'rgba(6,78,59,0.12)',
-              border: '1px solid rgba(16,185,129,0.2)',
+              background: 'var(--trust-bg)',
+              border: '1px solid var(--trust-border)',
               borderRadius: '10px',
               padding: '0.875rem',
               display: 'flex',
@@ -200,13 +200,13 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               gap: '0.75rem',
             }}
           >
-            <div className="narrative-label" style={{ color: '#4ade80' }}>
+            <div className="narrative-label" style={{ color: 'var(--trust-500)' }}>
               Historical Profile (Immutable Features)
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Prior Successful Txns: <span className="mono" style={{ color: '#4ade80', fontWeight: 700 }}>{formData.prior_success_count}</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Prior Successful Txns: <span className="mono" style={{ color: 'var(--trust-500)', fontWeight: 700 }}>{formData.prior_success_count}</span>
                 </label>
                 <input
                   type="range"
@@ -219,8 +219,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               </div>
 
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Prior Disputes / Chargebacks: <span className="mono" style={{ color: '#f87171', fontWeight: 700 }}>{formData.prior_chargeback_count}</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Prior Disputes / Chargebacks: <span className="mono" style={{ color: 'var(--risk-500)', fontWeight: 700 }}>{formData.prior_chargeback_count}</span>
                 </label>
                 <input
                   type="range"
@@ -233,8 +233,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               </div>
 
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Account Age (Days): <span className="mono" style={{ color: '#cbd5e1' }}>{formData.customer_age_days}d</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Account Age (Days): <span className="mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{formData.customer_age_days}d</span>
                 </label>
                 <input
                   type="range"
@@ -247,8 +247,8 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               </div>
 
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  1h Velocity Burst: <span className="mono" style={{ color: '#cbd5e1' }}>{formData.velocity_1h} txns</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  1-Hour Velocity (Txns): <span className="mono" style={{ color: formData.velocity_1h > 4 ? 'var(--risk-500)' : 'var(--text-primary)', fontWeight: 700 }}>{formData.velocity_1h}</span>
                 </label>
                 <input
                   type="range"
@@ -256,17 +256,17 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
                   max="15"
                   value={formData.velocity_1h}
                   onChange={(e) => handleChange('velocity_1h', parseInt(e.target.value))}
-                  style={{ width: '100%', accentColor: '#64748b' }}
+                  style={{ width: '100%', accentColor: '#f59e0b' }}
                 />
               </div>
             </div>
           </div>
 
-          {/* Section 3: Device & Verification State (Actionable Features) */}
+          {/* Section 3: Device & Verification Status */}
           <div
             style={{
-              background: 'rgba(15,23,42,0.6)',
-              border: '1px solid rgba(148,163,184,0.1)',
+              background: 'var(--bg-surface-elevated)',
+              border: '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '0.875rem',
               display: 'flex',
@@ -274,16 +274,16 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               gap: '0.75rem',
             }}
           >
-            <div className="narrative-label">Device & Verification (Actionable Features)</div>
+            <div className="narrative-label">Device & Actionable Status</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Device Age (Days): <span className="mono" style={{ color: '#60a5fa' }}>{formData.device_age_days}d</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Device Age (Days): <span className="mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{formData.device_age_days}d</span>
                 </label>
                 <input
                   type="range"
                   min="1"
-                  max="365"
+                  max="180"
                   value={formData.device_age_days}
                   onChange={(e) => handleChange('device_age_days', parseInt(e.target.value))}
                   style={{ width: '100%', accentColor: '#3b82f6' }}
@@ -291,13 +291,13 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
               </div>
 
               <div>
-                <label style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block', marginBottom: '0.25rem' }}>
-                  Pincode Distance (km): <span className="mono" style={{ color: '#60a5fa' }}>{formData.pincode_distance_km} km</span>
+                <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.25rem' }}>
+                  Pincode Distance: <span className="mono" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{formData.pincode_distance_km} km</span>
                 </label>
                 <input
                   type="range"
                   min="0"
-                  max="1500"
+                  max="2000"
                   step="5"
                   value={formData.pincode_distance_km}
                   onChange={(e) => handleChange('pincode_distance_km', parseFloat(e.target.value))}
@@ -307,46 +307,82 @@ export default function CustomSimulatorModal({ isOpen, onClose, onAnalyzeCustom,
             </div>
 
             {/* Toggle Switches */}
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '0.25rem' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#cbd5e1', cursor: 'pointer' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem', marginTop: '0.25rem' }}>
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.72rem',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  background: 'var(--bg-surface-card)',
+                  padding: '0.4rem 0.6rem',
+                  borderRadius: '6px',
+                  border: '1px solid var(--border-subtle)',
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={formData.phone_verified === 1}
                   onChange={(e) => handleChange('phone_verified', e.target.checked ? 1 : 0)}
-                  style={{ accentColor: '#10b981' }}
                 />
-                Phone Verified
+                <span>Phone Verified</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#cbd5e1', cursor: 'pointer' }}>
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.72rem',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  background: 'var(--bg-surface-card)',
+                  padding: '0.4rem 0.6rem',
+                  borderRadius: '6px',
+                  border: '1px solid var(--border-subtle)',
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={formData.device_trusted === 1}
                   onChange={(e) => handleChange('device_trusted', e.target.checked ? 1 : 0)}
-                  style={{ accentColor: '#10b981' }}
                 />
-                Device Hardware Token Bound
+                <span>Device Trusted</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#cbd5e1', cursor: 'pointer' }}>
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.72rem',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  background: 'var(--bg-surface-card)',
+                  padding: '0.4rem 0.6rem',
+                  borderRadius: '6px',
+                  border: '1px solid var(--border-subtle)',
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={formData.ip_country_match === 1}
                   onChange={(e) => handleChange('ip_country_match', e.target.checked ? 1 : 0)}
-                  style={{ accentColor: '#10b981' }}
                 />
-                Domestic IP Match
+                <span>Domestic IP</span>
               </label>
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem', marginTop: '0.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.5rem' }}>
             <button type="button" className="btn btn-secondary" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" style={{ padding: '0.55rem 1.25rem' }}>
+            <button type="submit" className="btn btn-primary">
               <Play className="w-3.5 h-3.5" />
-              <span>Run Live Simulation</span>
+              <span>Evaluate Custom Transaction</span>
             </button>
           </div>
         </form>

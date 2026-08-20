@@ -17,12 +17,12 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
         style={{ maxWidth: '780px', padding: '2rem' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="drawer-header" style={{ borderBottom: '2px solid rgba(148,163,184,0.2)', paddingBottom: '1rem' }}>
+        <div className="drawer-header" style={{ borderBottom: '2px solid var(--border-default)', paddingBottom: '1rem' }}>
           <div>
-            <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#60a5fa', fontWeight: 800 }}>
+            <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--primary-500)', fontWeight: 800 }}>
               Official Payment Risk Incident Dossier • Razorpay AI Buildathon 2026
             </div>
-            <h1 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f1f5f9', marginTop: '0.2rem' }}>
+            <h1 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
               Decision Intelligence RCA & Dispute Audit Report
             </h1>
           </div>
@@ -32,7 +32,7 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
               <Printer className="w-3.5 h-3.5" />
               <span>Print Dossier</span>
             </button>
-            <button onClick={onClose} style={{ color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer' }}>
+            <button onClick={onClose} style={{ color: 'var(--text-secondary)', background: 'none', border: 'none', cursor: 'pointer' }}>
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -41,28 +41,28 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
         {/* Dossier Content */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '1rem' }}>
           {/* Metadata Row */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', background: 'rgba(15,23,42,0.8)', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(148,163,184,0.12)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', background: 'var(--bg-surface-elevated)', padding: '1rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
             <div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase' }}>Transaction ID</div>
-              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9' }}>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Transaction ID</div>
+              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 {analysisData.transaction.id}
               </div>
             </div>
             <div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase' }}>Gross Amount</div>
-              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9' }}>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Gross Amount</div>
+              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 ₹{analysisData.transaction.amount.toLocaleString('en-IN')} ({analysisData.transaction.payment_method})
               </div>
             </div>
             <div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase' }}>Simulated Risk</div>
-              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f87171' }}>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Simulated Risk</div>
+              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--risk-500)' }}>
                 {analysisData.risk.score}/100 ({analysisData.risk.decision})
               </div>
             </div>
             <div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase' }}>Recommended Remediation</div>
-              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#34d399' }}>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Recommended Remediation</div>
+              <div className="mono" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--trust-500)' }}>
                 {analysisData.recommendation.action_title}
               </div>
             </div>
@@ -70,20 +70,20 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
 
           {/* Section 1: Executive Findings */}
           <div>
-            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#93c5fd', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-500)', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
               1. Executive Root Cause Analysis
             </h3>
-            <p style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: 1.6, background: 'rgba(15,23,42,0.5)', padding: '0.875rem', borderRadius: '8px', border: '1px solid rgba(148,163,184,0.1)' }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.6, background: 'var(--bg-surface-elevated)', padding: '0.875rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
               {analysisData.explanation.summary}
             </p>
           </div>
 
           {/* Section 2: Exact Feature Contributions */}
           <div>
-            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#93c5fd', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-500)', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
               2. Deterministic Linear Waterfall Proof (x · w)
             </h3>
-            <table className="weights-table" style={{ background: 'rgba(15,23,42,0.5)' }}>
+            <table className="weights-table" style={{ background: 'var(--bg-surface-elevated)' }}>
               <thead>
                 <tr>
                   <th>Factor</th>
@@ -95,18 +95,18 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
               <tbody>
                 {analysisData.risk_signals.slice(0, 3).map((s) => (
                   <tr key={s.feature}>
-                    <td className="mono" style={{ color: '#f87171', fontWeight: 600 }}>{s.name}</td>
+                    <td className="mono" style={{ color: 'var(--risk-500)', fontWeight: 700 }}>{s.name}</td>
                     <td><span className="badge badge-risk">Risk Contributor</span></td>
-                    <td className="mono" style={{ color: '#f87171', fontWeight: 700 }}>+{s.contribution.toFixed(2)}</td>
-                    <td style={{ color: '#cbd5e1' }}>{s.description}</td>
+                    <td className="mono" style={{ color: 'var(--risk-500)', fontWeight: 800 }}>+{s.contribution.toFixed(2)}</td>
+                    <td style={{ color: 'var(--text-secondary)' }}>{s.description}</td>
                   </tr>
                 ))}
                 {analysisData.trust_signals.slice(0, 3).map((s) => (
                   <tr key={s.feature}>
-                    <td className="mono" style={{ color: '#4ade80', fontWeight: 600 }}>{s.name}</td>
+                    <td className="mono" style={{ color: 'var(--trust-500)', fontWeight: 700 }}>{s.name}</td>
                     <td><span className="badge badge-trust">Trust Anchor</span></td>
-                    <td className="mono" style={{ color: '#4ade80', fontWeight: 700 }}>{s.contribution.toFixed(2)}</td>
-                    <td style={{ color: '#cbd5e1' }}>{s.description}</td>
+                    <td className="mono" style={{ color: 'var(--trust-500)', fontWeight: 800 }}>{s.contribution.toFixed(2)}</td>
+                    <td style={{ color: 'var(--text-secondary)' }}>{s.description}</td>
                   </tr>
                 ))}
               </tbody>
@@ -115,17 +115,17 @@ export default function ExecutiveDossierModal({ isOpen, onClose, analysisData })
 
           {/* Section 3: Counterfactual Remediation Verification */}
           <div>
-            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#93c5fd', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
+            <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-500)', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
               3. Counterfactual Intervention Analysis & Governance
             </h3>
-            <div style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: 1.5, background: 'rgba(6,78,59,0.15)', border: '1px solid rgba(16,185,129,0.25)', padding: '0.875rem', borderRadius: '8px' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5, background: 'var(--trust-bg)', border: '1px solid var(--trust-border)', padding: '0.875rem', borderRadius: '8px' }}>
               <strong>Governance Verification:</strong> Historical features (<code>customer_age_days</code>, <code>prior_chargebacks</code>, <code>prior_success_count</code>) were locked as <strong>IMMUTABLE</strong>.
               The optimal candidate <strong>{analysisData.recommendation.action_title}</strong> successfully mitigates risk from {analysisData.recommendation.risk_before} to {analysisData.recommendation.risk_after}/100 with {analysisData.recommendation.friction} friction.
             </div>
           </div>
 
           {/* Signoff */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(148,163,184,0.15)', paddingTop: '1rem', fontSize: '0.7rem', color: '#64748b' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
             <span>Audited by: RiskWise Decision Intelligence Layer</span>
             <span>Cryptographic Verification: SHA-256 Validated</span>
           </div>

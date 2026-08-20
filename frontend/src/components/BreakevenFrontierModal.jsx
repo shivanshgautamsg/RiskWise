@@ -49,21 +49,21 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                background: 'rgba(245, 158, 11, 0.15)',
-                border: '1px solid rgba(245, 158, 11, 0.3)',
+                background: 'var(--review-bg)',
+                border: '1px solid var(--review-border)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fbbf24',
+                color: 'var(--review-500)',
               }}
             >
               <Target className="w-4 h-4" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f1f5f9' }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 Decision Sensitivity & Breakeven Frontier
               </h2>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                 Analytical numerical roots where risk transitions without intervention
               </p>
             </div>
@@ -71,7 +71,7 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               background: 'none',
               border: 'none',
@@ -85,8 +85,8 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
         {/* Theoretical Description */}
         <div
           style={{
-            background: 'rgba(15,23,42,0.6)',
-            border: '1px solid rgba(148,163,184,0.1)',
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-subtle)',
             borderRadius: '10px',
             padding: '0.875rem',
             display: 'flex',
@@ -95,17 +95,17 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
           }}
         >
           <div className="narrative-label">
-            <Cpu className="w-3.5 h-3.5 text-blue-400" />
+            <Cpu className="w-3.5 h-3.5" style={{ color: 'var(--primary-500)' }} />
             <span>Mathematical Boundary Theorem</span>
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#cbd5e1', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
             By projecting the decision hyper-plane where logit(p) equals the review threshold, RiskWise computes the exact single-variable delta required to transition the payment status without requiring human intervention or 2FA friction.
           </p>
         </div>
 
         {/* Metrics List */}
         {loading ? (
-          <div style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
             Calculating multidimensional decision frontiers...
           </div>
         ) : (
@@ -116,8 +116,8 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
                 <div
                   key={m.feature}
                   style={{
-                    background: isImmutable ? 'rgba(6,78,59,0.1)' : 'rgba(15,23,42,0.8)',
-                    border: `1px solid ${isImmutable ? 'rgba(16,185,129,0.25)' : 'rgba(148,163,184,0.12)'}`,
+                    background: isImmutable ? 'var(--trust-bg)' : 'var(--bg-surface-elevated)',
+                    border: `1px solid ${isImmutable ? 'var(--trust-border)' : 'var(--border-subtle)'}`,
                     borderRadius: '10px',
                     padding: '0.875rem',
                     display: 'flex',
@@ -128,11 +128,11 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       {isImmutable ? (
-                        <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                        <Lock className="w-3.5 h-3.5" style={{ color: 'var(--trust-500)' }} />
                       ) : (
-                        <TrendingDown className="w-3.5 h-3.5 text-amber-400" />
+                        <TrendingDown className="w-3.5 h-3.5" style={{ color: 'var(--review-500)' }} />
                       )}
-                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9' }}>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                         {m.name}
                       </span>
                     </div>
@@ -156,25 +156,26 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
                       display: 'grid',
                       gridTemplateColumns: '1fr 1fr',
                       gap: '0.5rem',
-                      background: 'rgba(2,6,23,0.5)',
+                      background: 'var(--bg-surface-card)',
+                      border: '1px solid var(--border-subtle)',
                       padding: '0.6rem',
                       borderRadius: '8px',
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '0.65rem', color: '#64748b', textTransform: 'uppercase' }}>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
                         Current Observed
                       </div>
-                      <div className="mono" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#e2e8f0' }}>
+                      <div className="mono" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                         {m.unit === '₹' ? `₹${m.current_value.toLocaleString('en-IN')}` : `${m.current_value} ${m.unit}`}
                       </div>
                     </div>
 
                     <div>
-                      <div style={{ fontSize: '0.65rem', color: '#38bdf8', textTransform: 'uppercase' }}>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--primary-500)', textTransform: 'uppercase', fontWeight: 600 }}>
                         Decline Breakeven Limit
                       </div>
-                      <div className="mono" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#38bdf8' }}>
+                      <div className="mono" style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary-500)' }}>
                         {m.threshold_for_review
                           ? (m.unit === '₹'
                               ? `≤ ₹${m.threshold_for_review.toLocaleString('en-IN')}`
@@ -184,7 +185,7 @@ export default function BreakevenFrontierModal({ isOpen, onClose, scenarioId, tr
                     </div>
                   </div>
 
-                  <p style={{ fontSize: '0.72rem', color: '#94a3b8', lineHeight: 1.4 }}>
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
                     {m.explanation}
                   </p>
                 </div>

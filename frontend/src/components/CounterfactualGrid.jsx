@@ -10,7 +10,7 @@ export default function CounterfactualGrid({
     <div className="panel-card">
       <div className="panel-header">
         <div className="panel-title">
-          <Zap className="w-4 h-4" style={{ color: '#34d399' }} />
+          <Zap className="w-4 h-4" style={{ color: 'var(--trust-500)' }} />
           <span>WHAT WOULD CHANGE THE DECISION?</span>
         </div>
         <span className="panel-subtitle">Fixed Counterfactual Grid</span>
@@ -28,10 +28,10 @@ export default function CounterfactualGrid({
             if (isDeclineRec) cardClass += ' decline-rec';
 
             // Decision color
-            let decisionColor = '#94a3b8';
-            if (item.decision_after === 'APPROVE') decisionColor = '#4ade80';
-            else if (item.decision_after === 'REVIEW') decisionColor = '#fbbf24';
-            else if (item.decision_after === 'DECLINE') decisionColor = '#f87171';
+            let decisionColor = 'var(--text-secondary)';
+            if (item.decision_after === 'APPROVE') decisionColor = 'var(--trust-500)';
+            else if (item.decision_after === 'REVIEW') decisionColor = 'var(--review-500)';
+            else if (item.decision_after === 'DECLINE') decisionColor = 'var(--risk-500)';
 
             return (
               <div
@@ -45,7 +45,7 @@ export default function CounterfactualGrid({
                       <Sparkles
                         className="w-3.5 h-3.5"
                         style={{
-                          color: isDeclineRec ? '#f87171' : '#34d399',
+                          color: isDeclineRec ? 'var(--risk-500)' : 'var(--trust-500)',
                           animation: 'pulse 2s ease-in-out infinite',
                         }}
                       />
@@ -66,9 +66,9 @@ export default function CounterfactualGrid({
 
                 <div className="intervention-score-flow">
                   <div className="score-transition">
-                    <span className="mono" style={{ color: '#94a3b8' }}>{item.risk_before}</span>
-                    <ArrowRight className="w-3.5 h-3.5" style={{ color: '#475569' }} />
-                    <span className="mono" style={{ color: '#fff', fontWeight: 700 }}>{item.risk_after}</span>
+                    <span className="mono" style={{ color: 'var(--text-muted)' }}>{item.risk_before}</span>
+                    <ArrowRight className="w-3.5 h-3.5" style={{ color: 'var(--text-muted)' }} />
+                    <span className="mono" style={{ color: 'var(--text-primary)', fontWeight: 800 }}>{item.risk_after}</span>
                   </div>
 
                   <span className={`delta-badge ${hasRiskDrop ? 'drop' : 'neutral'}`}>
@@ -79,14 +79,14 @@ export default function CounterfactualGrid({
                     style={{
                       marginLeft: 'auto',
                       fontSize: '0.72rem',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.25rem',
                     }}
                   >
-                    <span style={{ color: '#64748b' }}>{item.decision_before}</span>
-                    <span style={{ color: '#64748b' }}>→</span>
+                    <span style={{ color: 'var(--text-muted)' }}>{item.decision_before}</span>
+                    <span style={{ color: 'var(--text-muted)' }}>→</span>
                     <span style={{ color: decisionColor }}>{item.decision_after}</span>
                   </span>
                 </div>
@@ -96,7 +96,7 @@ export default function CounterfactualGrid({
             );
           })
         ) : (
-          <p style={{ fontSize: '0.75rem', color: '#64748b', fontStyle: 'italic', padding: '1rem' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontStyle: 'italic', padding: '1rem' }}>
             Evaluating candidate interventions...
           </p>
         )}

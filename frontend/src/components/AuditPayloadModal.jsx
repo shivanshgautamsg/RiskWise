@@ -106,16 +106,16 @@ export default function AuditPayloadModal({ isOpen, onClose, analysisData }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#60a5fa',
+                color: 'var(--primary-500)',
               }}
             >
               <Code className="w-4 h-4" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f1f5f9' }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 Compliance Audit & Webhook Payload
               </h2>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                 Production-ready telemetry data for merchant risk orchestration
               </p>
             </div>
@@ -123,7 +123,7 @@ export default function AuditPayloadModal({ isOpen, onClose, analysisData }) {
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               background: 'none',
               border: 'none',
@@ -174,8 +174,8 @@ export default function AuditPayloadModal({ isOpen, onClose, analysisData }) {
         {/* JSON Code Viewer */}
         <div
           style={{
-            background: 'rgba(2,6,23,0.85)',
-            border: '1px solid rgba(148,163,184,0.12)',
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-subtle)',
             borderRadius: '10px',
             padding: '1rem',
             overflowX: 'auto',
@@ -186,7 +186,7 @@ export default function AuditPayloadModal({ isOpen, onClose, analysisData }) {
             className="mono"
             style={{
               fontSize: '0.72rem',
-              color: '#93c5fd',
+              color: 'var(--primary-500)',
               lineHeight: 1.5,
               whiteSpace: 'pre-wrap',
             }}
@@ -195,7 +195,7 @@ export default function AuditPayloadModal({ isOpen, onClose, analysisData }) {
           </pre>
         </div>
 
-        <div style={{ fontSize: '0.7rem', color: '#64748b', display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', justifyContent: 'space-between' }}>
           <span>Deterministic Verification Hash: 8f4b2e9...6c20</span>
           <span>Inference Latency: &lt; 4ms</span>
         </div>

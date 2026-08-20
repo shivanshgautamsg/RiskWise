@@ -894,44 +894,90 @@ body {
   background: rgba(15, 23, 42, 0.4);
 }
 
-[data-theme="light"] .cf-score-row {
-  background: #f1f5f9;
-  border: 1px solid var(--border-subtle);
-}
-
-[data-theme="light"] .cf-score-val {
-  color: #0f172a;
-}
-
-[data-theme="light"] .cf-transition-badge {
-  color: #475569;
-}
-
-[data-theme="light"] .cf-card-header span {
-  color: #0f172a;
-}
-
-[data-theme="light"] .cf-desc {
-  color: #475569;
-}
-
-[data-theme="light"] .rec-action-hero {
+[data-theme="light"] .intervention-card {
   background: #ffffff;
-  border-color: var(--border-default);
+  border: 1px solid var(--border-default);
 }
 
-[data-theme="light"] .rec-action-hero.success {
+[data-theme="light"] .intervention-card:hover {
+  background: #f8fafc;
+  border-color: var(--border-highlight);
+}
+
+[data-theme="light"] .intervention-card.recommended {
   background: #f0fdf4;
-  border-color: rgba(16, 185, 129, 0.4);
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.08);
 }
 
-[data-theme="light"] .rec-action-hero.danger {
+[data-theme="light"] .intervention-card.decline-rec {
   background: #fef2f2;
   border-color: rgba(239, 68, 68, 0.4);
 }
 
+[data-theme="light"] .intervention-score-flow {
+  background: #f1f5f9;
+  border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .delta-badge.drop {
+  background: rgba(5, 150, 105, 0.12);
+  color: #047857;
+}
+
+[data-theme="light"] .delta-badge.neutral {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+[data-theme="light"] .badge-friction {
+  background: #f1f5f9;
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .badge-risk {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #b91c1c;
+}
+
+[data-theme="light"] .badge-trust {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.3);
+  color: #047857;
+}
+
+[data-theme="light"] .badge-review {
+  background: rgba(217, 119, 6, 0.1);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #b45309;
+}
+
 [data-theme="light"] .signal-item-card {
   background: #ffffff;
+}
+
+[data-theme="light"] .signal-item-card.risk-signal {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: linear-gradient(135deg, #ffffff, rgba(254, 242, 242, 0.6));
+}
+
+[data-theme="light"] .signal-item-card.trust-signal {
+  border-color: rgba(5, 150, 105, 0.25);
+  background: linear-gradient(135deg, #ffffff, rgba(240, 253, 244, 0.6));
+}
+
+[data-theme="light"] .signal-weight-pill.risk {
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="light"] .signal-weight-pill.trust {
+  background: rgba(5, 150, 105, 0.12);
+  color: #047857;
+  border: 1px solid rgba(5, 150, 105, 0.3);
 }
 
 [data-theme="light"] .signal-top-line span {
@@ -939,11 +985,39 @@ body {
 }
 
 [data-theme="light"] .signal-desc-text {
-  color: #475569;
+  color: #334155;
+}
+
+[data-theme="light"] .signal-bar-mini {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .risk-bar-track {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .recommendation-hero-card {
+  background: #ffffff;
+  border-color: var(--border-default);
+}
+
+[data-theme="light"] .recommendation-hero-card.decline-hero {
+  background: #fef2f2;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+[data-theme="light"] .rec-narrative-grid {
+  background: #f8fafc;
+  border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .drawer-backdrop {
+  background: rgba(15, 23, 42, 0.4);
 }
 
 [data-theme="light"] .weights-table tbody tr:hover {
   background: #f1f5f9;
 }
+
 
 

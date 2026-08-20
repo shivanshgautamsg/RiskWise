@@ -16,15 +16,15 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
       <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
         <div className="drawer-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Sliders className="w-5 h-5" style={{ color: '#60a5fa' }} />
-            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f1f5f9' }}>
+            <Sliders className="w-5 h-5" style={{ color: 'var(--primary-500)' }} />
+            <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
               Model Transparency & Governance
             </h2>
           </div>
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8', cursor: 'pointer', background: 'none',
+              color: 'var(--text-secondary)', cursor: 'pointer', background: 'none',
               border: 'none', padding: '0.25rem', borderRadius: '6px',
             }}
           >
@@ -34,23 +34,24 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
 
         {/* Architecture */}
         <div style={{
-          background: 'rgba(15,23,42,0.6)',
-          border: '1px solid rgba(148,163,184,0.12)',
+          background: 'var(--bg-surface-elevated)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: '10px', padding: '0.875rem',
           display: 'flex', flexDirection: 'column', gap: '0.5rem',
         }}>
           <div className="narrative-label">
-            <Cpu className="w-3.5 h-3.5" style={{ color: '#60a5fa' }} />
+            <Cpu className="w-3.5 h-3.5" style={{ color: 'var(--primary-500)' }} />
             <span>Architecture: Interpretable Linear Model</span>
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#cbd5e1', lineHeight: 1.5 }}>
-            RiskWise uses <span className="mono" style={{ color: '#93c5fd' }}>StandardScaler + LogisticRegression</span>.
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            RiskWise uses <span className="mono" style={{ color: 'var(--primary-500)', fontWeight: 600 }}>StandardScaler + LogisticRegression</span>.
             The linear formulation ensures that every feature contribution is mathematically exact:
           </p>
           <div style={{
-            background: 'rgba(2,6,23,0.7)', padding: '0.5rem 0.75rem',
-            borderRadius: '6px', border: '1px solid rgba(148,163,184,0.1)',
-            fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#93c5fd',
+            background: 'var(--bg-surface-card)', padding: '0.5rem 0.75rem',
+            borderRadius: '6px', border: '1px solid var(--border-subtle)',
+            fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--primary-500)',
+            fontWeight: 600,
           }}>
             logit(fraud) = w₀ + Σ (wᵢ · (xᵢ - μᵢ) / σᵢ)
           </div>
@@ -60,17 +61,17 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
         {metrics.precision && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem' }}>
             {[
-              { label: 'Precision', value: `${(metrics.precision * 100).toFixed(1)}%`, color: '#4ade80' },
-              { label: 'ROC-AUC', value: metrics.roc_auc?.toFixed(3), color: '#60a5fa' },
-              { label: 'PR-AUC', value: metrics.pr_auc?.toFixed(3), color: '#c084fc' },
+              { label: 'Precision', value: `${(metrics.precision * 100).toFixed(1)}%`, color: 'var(--trust-500)' },
+              { label: 'ROC-AUC', value: metrics.roc_auc?.toFixed(3), color: 'var(--primary-500)' },
+              { label: 'PR-AUC', value: metrics.pr_auc?.toFixed(3), color: '#8b5cf6' },
             ].map((m) => (
               <div key={m.label} style={{
-                background: 'rgba(15,23,42,0.8)',
-                border: '1px solid rgba(148,163,184,0.12)',
+                background: 'var(--bg-surface-elevated)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '10px', padding: '0.65rem', textAlign: 'center',
               }}>
-                <div style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 500 }}>{m.label}</div>
-                <div className="mono" style={{ fontSize: '1.1rem', fontWeight: 700, color: m.color }}>
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontWeight: 600 }}>{m.label}</div>
+                <div className="mono" style={{ fontSize: '1.1rem', fontWeight: 800, color: m.color }}>
                   {m.value}
                 </div>
               </div>
@@ -80,24 +81,24 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
 
         {/* Immutability */}
         <div style={{
-          background: 'rgba(6,78,59,0.15)',
-          border: '1px solid rgba(16,185,129,0.25)',
+          background: 'var(--trust-bg)',
+          border: '1px solid var(--trust-border)',
           borderRadius: '10px', padding: '0.875rem',
           display: 'flex', flexDirection: 'column', gap: '0.4rem',
         }}>
           <div style={{
-            fontSize: '0.72rem', fontWeight: 700, color: '#4ade80',
+            fontSize: '0.72rem', fontWeight: 700, color: 'var(--trust-500)',
             display: 'flex', alignItems: 'center', gap: '0.35rem',
           }}>
             <Lock className="w-3.5 h-3.5" />
             <span>Immutable Feature Governance</span>
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#cbd5e1', lineHeight: 1.55 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
             Historical variables (
-            <code className="mono" style={{ color: '#86efac', fontSize: '0.72rem' }}>customer_age_days</code>,{' '}
-            <code className="mono" style={{ color: '#86efac', fontSize: '0.72rem' }}>prior_chargebacks</code>,{' '}
-            <code className="mono" style={{ color: '#86efac', fontSize: '0.72rem' }}>prior_success_count</code>
-            ) are locked as <span style={{ fontWeight: 600, color: '#f1f5f9' }}>IMMUTABLE</span>.
+            <code className="mono" style={{ color: 'var(--trust-500)', fontWeight: 700 }}>customer_age_days</code>,{' '}
+            <code className="mono" style={{ color: 'var(--trust-500)', fontWeight: 700 }}>prior_chargebacks</code>,{' '}
+            <code className="mono" style={{ color: 'var(--trust-500)', fontWeight: 700 }}>prior_success_count</code>
+            ) are locked as <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>IMMUTABLE</span>.
             Counterfactual engines are strictly prohibited from modifying them to prevent hallucinated remediations.
           </p>
         </div>
@@ -105,12 +106,12 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
         {/* Weights Table */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <div className="narrative-label">
-            <Scale className="w-3.5 h-3.5" style={{ color: '#60a5fa' }} />
+            <Scale className="w-3.5 h-3.5" style={{ color: 'var(--primary-500)' }} />
             <span>Learned Feature Weights (Standardized)</span>
           </div>
 
           <div style={{
-            border: '1px solid rgba(148,163,184,0.12)',
+            border: '1px solid var(--border-subtle)',
             borderRadius: '10px', overflow: 'hidden',
           }}>
             <table className="weights-table">
@@ -126,9 +127,9 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
                   const isPositive = weight > 0;
                   return (
                     <tr key={feat}>
-                      <td className="mono" style={{ fontSize: '0.72rem', color: '#e2e8f0' }}>{feat}</td>
+                      <td className="mono" style={{ fontSize: '0.72rem', color: 'var(--text-primary)', fontWeight: 600 }}>{feat}</td>
                       <td className="mono" style={{ fontSize: '0.72rem', fontWeight: 700 }}>
-                        <span style={{ color: isPositive ? '#f87171' : '#4ade80' }}>
+                        <span style={{ color: isPositive ? 'var(--risk-500)' : 'var(--trust-500)' }}>
                           {isPositive ? `+${weight.toFixed(3)}` : weight.toFixed(3)}
                         </span>
                       </td>
@@ -147,17 +148,10 @@ export default function TransparencyDrawer({ isOpen, onClose, modelMetadata }) {
 
         {/* Disclaimer */}
         <div style={{
-          fontSize: '0.72rem', color: '#64748b',
-          borderTop: '1px solid rgba(148,163,184,0.1)',
-          paddingTop: '0.75rem',
-          display: 'flex', flexDirection: 'column', gap: '0.25rem',
+          fontSize: '0.72rem', color: 'var(--text-muted)',
+          lineHeight: 1.4, borderTop: '1px solid var(--border-subtle)', paddingTop: '0.75rem',
         }}>
-          <span style={{ fontWeight: 700, color: '#94a3b8' }}>Prototype Disclosure</span>
-          <p>
-            RiskWise is a buildathon prototype exploring decision-intelligence layers.
-            It does not access Razorpay proprietary production models or merchant data.
-            All transaction data and upstream models are simulated.
-          </p>
+          Simulated surrogate model trained on 15,000 synthetic UPI transactions for the Razorpay AI Buildathon 2026.
         </div>
       </div>
     </div>

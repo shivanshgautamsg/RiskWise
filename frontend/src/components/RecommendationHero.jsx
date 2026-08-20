@@ -87,7 +87,7 @@ export default function RecommendationHero({
       <div className="rec-narrative-grid">
         <div className="narrative-block">
           <div className="narrative-label">
-            <Sparkles className="w-3 h-3" style={{ color: '#60a5fa' }} />
+            <Sparkles className="w-3 h-3" style={{ color: 'var(--primary-500)' }} />
             <span>Executive Narrative ({explanation?.source === 'AI_GENERATED' ? 'AI Grounded' : 'Deterministic Rule'})</span>
           </div>
           <p className="narrative-text strong">
@@ -96,15 +96,15 @@ export default function RecommendationHero({
         </div>
 
         <div className="narrative-block">
-          <div className="narrative-label">Primary Risk Driver</div>
-          <p className="narrative-text" style={{ color: '#fca5a5' }}>
+          <div className="narrative-label" style={{ color: 'var(--risk-500)' }}>Primary Risk Driver</div>
+          <p className="narrative-text" style={{ color: 'var(--risk-500)', fontWeight: 600 }}>
             {explanation?.primary_driver || 'Device & transaction timing risk'}
           </p>
         </div>
 
         <div className="narrative-block">
-          <div className="narrative-label">Mitigating Trust Anchor</div>
-          <p className="narrative-text" style={{ color: '#86efac' }}>
+          <div className="narrative-label" style={{ color: 'var(--trust-500)' }}>Mitigating Trust Anchor</div>
+          <p className="narrative-text" style={{ color: 'var(--trust-500)', fontWeight: 600 }}>
             {explanation?.mitigating_factor || 'Historical account tenure & success volume'}
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function RecommendationHero({
       {executed && (
         <div className={`simulation-alert ${isDecline ? 'danger' : 'success'}`}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Shield className="w-4 h-4" style={{ color: isDecline ? '#f87171' : '#34d399' }} />
+            <Shield className="w-4 h-4" style={{ color: isDecline ? 'var(--risk-500)' : 'var(--trust-500)' }} />
             <span>
               {isDecline
                 ? 'Decline decision maintained and recorded in merchant fraud telemetry.'
@@ -126,11 +126,12 @@ export default function RecommendationHero({
             style={{
               fontSize: '0.72rem',
               textDecoration: 'underline',
-              color: isDecline ? '#fca5a5' : '#6ee7b7',
+              color: isDecline ? 'var(--risk-500)' : 'var(--trust-500)',
               cursor: 'pointer',
               background: 'none',
               border: 'none',
               fontFamily: 'inherit',
+              fontWeight: 700,
             }}
           >
             Reset

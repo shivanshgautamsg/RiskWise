@@ -98,10 +98,10 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
               <Bot className="w-4 h-4" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f1f5f9' }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 RiskWise AI Copilot
               </h2>
-              <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                 Zero-hallucination natural language risk intelligence
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
           <button
             onClick={onClose}
             style={{
-              color: '#94a3b8',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               background: 'none',
               border: 'none',
@@ -149,12 +149,12 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                       width: '26px',
                       height: '26px',
                       borderRadius: '6px',
-                      background: 'rgba(99,102,241,0.2)',
-                      border: '1px solid rgba(99,102,241,0.4)',
+                      background: 'rgba(99,102,241,0.15)',
+                      border: '1px solid rgba(99,102,241,0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#a5b4fc',
+                      color: 'var(--primary-500)',
                       flexShrink: 0,
                     }}
                   >
@@ -165,12 +165,12 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                   <div
                     style={{
-                      background: isUser ? '#2563eb' : 'rgba(15,23,42,0.85)',
-                      border: isUser ? 'none' : '1px solid rgba(148,163,184,0.12)',
+                      background: isUser ? 'var(--primary-600)' : 'var(--bg-surface-elevated)',
+                      border: isUser ? 'none' : '1px solid var(--border-subtle)',
                       borderRadius: '10px',
                       padding: '0.7rem 0.875rem',
                       fontSize: '0.76rem',
-                      color: isUser ? '#fff' : '#cbd5e1',
+                      color: isUser ? '#ffffff' : 'var(--text-primary)',
                       lineHeight: 1.55,
                     }}
                   >
@@ -192,12 +192,13 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                           style={{
                             fontSize: '0.66rem',
                             padding: '0.2rem 0.5rem',
-                            background: 'rgba(99,102,241,0.1)',
-                            borderColor: 'rgba(99,102,241,0.25)',
-                            color: '#a5b4fc',
+                            background: 'var(--bg-surface-card)',
+                            borderColor: 'var(--border-subtle)',
+                            color: 'var(--primary-500)',
+                            fontWeight: 600,
                           }}
                         >
-                          <Sparkles className="w-2.5 h-2.5 text-indigo-400" />
+                          <Sparkles className="w-2.5 h-2.5" />
                           <span>{sug}</span>
                         </button>
                       ))}
@@ -211,7 +212,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                       width: '26px',
                       height: '26px',
                       borderRadius: '6px',
-                      background: '#1d4ed8',
+                      background: 'var(--primary-600)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -227,7 +228,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
           })}
 
           {loading && (
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', color: '#94a3b8', fontSize: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.75rem' }}>
               <Bot className="w-4 h-4 animate-spin text-indigo-400" />
               <span>Analyzing decision facts & calculating bounds...</span>
             </div>
@@ -246,7 +247,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
             display: 'flex',
             gap: '0.5rem',
             paddingTop: '0.75rem',
-            borderTop: '1px solid rgba(148,163,184,0.1)',
+            borderTop: '1px solid var(--border-subtle)',
           }}
         >
           <input
