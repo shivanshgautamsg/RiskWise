@@ -1,0 +1,46 @@
+{
+  "model_type": "LogisticRegression (with StandardScaler)",
+  "features": [
+    "amount",
+    "customer_age_days",
+    "device_age_days",
+    "prior_success_count",
+    "prior_chargeback_count",
+    "velocity_1h",
+    "velocity_24h",
+    "pincode_distance_km",
+    "phone_verified",
+    "device_trusted",
+    "ip_country_match",
+    "hour"
+  ],
+  "intercept": -3.983939639283044,
+  "coefficients": {
+    "amount": 0.6200388950131395,
+    "customer_age_days": -1.378257035023374,
+    "device_age_days": -2.231809922788885,
+    "prior_success_count": -1.0424839442805434,
+    "prior_chargeback_count": 3.628866460234611,
+    "velocity_1h": 1.276535179017563,
+    "velocity_24h": 0.41502506996355354,
+    "pincode_distance_km": 1.5264968462235269,
+    "phone_verified": -0.46133188534581465,
+    "device_trusted": -0.7099077219007628,
+    "ip_country_match": -0.4076961552333625,
+    "hour": -0.27288258241360386
+  },
+  "test_metrics": {
+    "precision": 0.8492,
+    "recall": 0.6711,
+    "f1_score": 0.7497,
+    "roc_auc": 0.961,
+    "pr_auc": 0.8644,
+    "test_sample_count": 3000,
+    "fraud_rate_test": 0.151
+  },
+  "thresholds": {
+    "approve_max": 39,
+    "review_max": 69,
+    "decline_min": 70
+  }
+}
