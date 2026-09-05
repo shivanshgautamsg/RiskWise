@@ -37,3 +37,9 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Media & Video Assets
+video_assets/
+*.mp4
+*.mp3
+*.wav
