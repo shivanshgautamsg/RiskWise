@@ -43,3 +43,4 @@ video_assets/
 *.mp4
 *.mp3
 *.wav
+backend/scripts/generate_pitch_video.py
