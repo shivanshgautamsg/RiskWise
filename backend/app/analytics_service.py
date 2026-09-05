@@ -41,6 +41,8 @@ class CopilotMessage(BaseModel):
     content: str
     highlight_features: Optional[List[str]] = None
     suggested_followups: Optional[List[str]] = None
+    rag_citations: Optional[List[Dict[str, str]]] = None
+    llm_model: Optional[str] = None
 
 
 def compute_breakeven_analysis(transaction: Transaction) -> List[BreakevenMetric]:
@@ -271,10 +273,12 @@ async def answer_copilot_query(
     risk_signals: List[FeatureContribution],
     trust_signals: List[FeatureContribution],
     recommendation: Recommendation,
+    rag_citations: Optional[List[Dict[str, str]]] = None,
+    llm_model: Optional[str] = None,
 ) -> CopilotMessage:
     """
     Intelligent Analyst Copilot Q&A with strict grounding against the deterministic decision facts.
-    Handles all variations of risk, safety, why, counterfactuals, breakeven, and governance queries.
+    Now enriched with RAG regulatory citations and LLM model attribution.
     """
     q = query.lower().strip()
 
@@ -450,8 +454,13 @@ async def answer_copilot_query(
     content = (
         f"**Decision Intelligence for {transaction.id}**:\n"
         f"- **Simulated Score**: **{risk.score}/100 ({risk.decision})**\n"
-        f"- **Top Risk Contributor**: {top_r.name if top_r else 'None'} (+{top_r.contribution:.2f if top_r else 0})\n"
-        f"- **Top Trust Anchor**: {top_t.name if top_t else 'None'} ({top_t.contribution:.2f if top_t else 0})\n"
+        f"- **Top Risk Contributor**: {top_r.name if top_r else 'None'} (+{top_r.contribution:.2f})\n"
+        f"- **Top Trust Anchor**: {top_t.name if top_t else 'None'} ({top_t.contribution:.2f})\n"
+        f"- **Actionable Recommendation**: **{recommendation.action_title}** ({recommendation.decision_transition})\n\n"
+        f"Ask me about specific drivers, breakeven boundaries, or counterfactual remediations."
+    ) if top_r and top_t else (
+        f"**Decision Intelligence for {transaction.id}**:\n"
+        f"- **Simulated Score**: **{risk.score}/100 ({risk.decision})**\n"
         f"- **Actionable Recommendation**: **{recommendation.action_title}** ({recommendation.decision_transition})\n\n"
         f"Ask me about specific drivers, breakeven boundaries, or counterfactual remediations."
     )
@@ -460,4 +469,6 @@ async def answer_copilot_query(
         content=content,
         highlight_features=[top_r.feature if top_r else "amount"],
         suggested_followups=["Why was this evaluated as risky?", "What would change the decision?", "Show breakeven boundary"],
+        rag_citations=rag_citations,
+        llm_model=llm_model,
     )

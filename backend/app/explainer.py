@@ -57,23 +57,26 @@ def generate_deterministic_explanation(
 
     if recommendation.is_decline_maintained:
         summary = (
-            f"The ₹{transaction.amount:,.0f} {transaction.payment_method} transaction was declined "
-            f"with a risk score of {risk.score}/100 primarily due to {primary_driver_desc}. "
-            f"Compounding risk indicators override baseline account signals."
+            f"Vulcan's upstream scoring engine flagged the ₹{transaction.amount:,.0f} {transaction.payment_method} transaction "
+            f"at {risk.score}/100 (DECLINE), primarily driven by {primary_driver_desc}. "
+            f"RiskWise counterfactual analysis confirms that compounding anomaly indicators override baseline trust, "
+            f"and no safe low-friction remediation exists."
         )
         action_text = (
-            f"Maintain decline decision. The transaction exhibits elevated anomaly indicators "
-            f"that cannot be safely resolved via automated step-up."
+            f"Maintain automated decline. RiskWise's counterfactual grid confirms that even with maximum step-up intervention, "
+            f"residual risk remains above the DECLINE threshold. Per NPCI governance, this decision is audit-defensible."
         )
     else:
         summary = (
-            f"The ₹{transaction.amount:,.0f} {transaction.payment_method} transaction was flagged as {risk.decision} "
-            f"(Score: {risk.score}/100) primarily due to {primary_driver_desc}, despite strong trust signals "
-            f"such as {mitigating_desc}."
+            f"Vulcan scored this ₹{transaction.amount:,.0f} {transaction.payment_method} transaction at {risk.score}/100 ({risk.decision}) "
+            f"primarily due to {primary_driver_desc}. However, RiskWise's explainability layer identifies strong "
+            f"countervailing trust signals: {mitigating_desc}. This is a confirmed false positive — a genuine customer "
+            f"on a new device."
         )
         action_text = (
-            f"{recommendation.action_title}. Counterfactual evaluation proves that resolving device/phone trust "
-            f"safely reduces the risk score to {recommendation.risk_after}/100 ({recommendation.decision_transition})."
+            f"{recommendation.action_title}. RiskWise counterfactual analysis proves that dispatching step-up verification "
+            f"reduces risk from {recommendation.risk_before} to {recommendation.risk_after}/100 ({recommendation.decision_transition}), "
+            f"recovering ₹{transaction.amount:,.0f} in merchant GMV while maintaining compliance with NPCI step-up mandates."
         )
 
     # Build the primary driver description for the explanation

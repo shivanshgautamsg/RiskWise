@@ -1,6 +1,7 @@
 """
 RiskWise Backend API
-FastAPI application providing risk scoring, explainability, counterfactual simulations, and recommendations.
+FastAPI application providing risk scoring, explainability, counterfactual simulations,
+recommendations, OmniRoute LLM gateway, RAG knowledge base, and autonomous agentic investigation.
 """
 
 import os
@@ -8,6 +9,7 @@ import json
 from typing import List, Dict, Any, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from .schemas import (
     Transaction,
@@ -24,7 +26,7 @@ from .feature_metadata import FEATURE_METADATA
 app = FastAPI(
     title="RiskWise Decision Intelligence API",
     description="Explainable Decision Intelligence Layer for Payment Risk (Razorpay AI Buildathon 2026)",
-    version="1.0.0",
+    version="2.0.0",
 )
 
 # Enable CORS for local dev and frontend ports
@@ -42,8 +44,8 @@ def health_check():
     return {
         "status": "healthy",
         "service": "RiskWise Decision Intelligence",
-        "mode": "Prototype • Synthetic Data",
-        "version": "1.0.0",
+        "mode": "Prototype • Synthetic Data • OmniRoute + RAG + Agentic AI",
+        "version": "2.0.0",
     }
 
 
@@ -170,7 +172,6 @@ from .analytics_service import (
     PortfolioStreamSummary,
     CopilotMessage,
 )
-from pydantic import BaseModel
 
 
 class CopilotRequest(BaseModel):
@@ -203,7 +204,7 @@ def get_portfolio_stream(count: int = 60):
 
 @app.post("/api/copilot/chat", response_model=CopilotMessage)
 async def chat_with_copilot(req: CopilotRequest):
-    """Analyst Copilot Q&A with strict grounding against deterministic decision facts."""
+    """Analyst Copilot Q&A with strict grounding, RAG citations, and OmniRoute LLM."""
     if req.transaction:
         txn = req.transaction
     elif req.scenario_id:
@@ -221,6 +222,16 @@ async def chat_with_copilot(req: CopilotRequest):
     raw_ints = evaluate_counterfactuals(feats, risk.score, risk.decision)
     rec, _ = select_best_intervention(raw_ints, risk.score, risk.decision)
 
+    # RAG: search knowledge base for regulatory context relevant to the query
+    from .rag_service import search_knowledge_base
+    from .llm_gateway import get_llm_config
+    rag_docs = search_knowledge_base(req.query, top_k=2)
+    rag_citations = [
+        {"source_reference": d.source_reference, "title": d.title, "category": d.category}
+        for d in rag_docs
+    ] if rag_docs else None
+    llm_config = get_llm_config()
+
     return await answer_copilot_query(
         query=req.query,
         transaction=txn,
@@ -228,5 +239,114 @@ async def chat_with_copilot(req: CopilotRequest):
         risk_signals=risk_sigs,
         trust_signals=trust_sigs,
         recommendation=rec,
+        rag_citations=rag_citations,
+        llm_model=llm_config.model_name,
     )
 
+
+# =========================================================================
+# OMNIROUTE LLM GATEWAY, RAG KNOWLEDGE BASE, & AGENTIC AI
+# =========================================================================
+from .llm_gateway import (
+    LLMConfig,
+    AvailableModel,
+    get_llm_config,
+    update_llm_config,
+    check_omniroute_health,
+    AVAILABLE_MODELS,
+)
+from .rag_service import search_knowledge_base, RAGDocument
+from .agentic_service import run_investigation, AgentInvestigation
+
+
+@app.get("/api/llm/config")
+async def get_llm_configuration():
+    """Returns current active LLM Brain configuration and OmniRoute health."""
+    config = get_llm_config()
+    health = await check_omniroute_health()
+    return {
+        "config": config.model_dump(),
+        "health": health,
+        "available_models": [m.model_dump() for m in AVAILABLE_MODELS],
+    }
+
+
+class LLMConfigUpdate(BaseModel):
+    model_name: Optional[str] = None
+    base_url: Optional[str] = None
+    api_key: Optional[str] = None
+    temperature: Optional[float] = None
+    enable_rag: Optional[bool] = None
+    enable_agentic_reasoning: Optional[bool] = None
+
+
+@app.post("/api/llm/config")
+async def set_llm_configuration(update: LLMConfigUpdate):
+    """Updates the active LLM Brain configuration."""
+    current = get_llm_config()
+    new_data = current.model_dump()
+    for field, value in update.model_dump(exclude_none=True).items():
+        new_data[field] = value
+    new_config = LLMConfig(**new_data)
+    updated = update_llm_config(new_config)
+    health = await check_omniroute_health(updated.base_url)
+    return {
+        "config": updated.model_dump(),
+        "health": health,
+    }
+
+
+@app.post("/api/llm/test")
+async def test_llm_connection():
+    """Tests OmniRoute / LLM Gateway connectivity."""
+    return await check_omniroute_health()
+
+
+class RAGSearchRequest(BaseModel):
+    query: str
+    top_k: int = 3
+
+
+@app.post("/api/rag/search")
+def search_rag(req: RAGSearchRequest):
+    """Searches the RAG knowledge base for relevant regulatory documents."""
+    docs = search_knowledge_base(req.query, top_k=req.top_k)
+    return {
+        "query": req.query,
+        "results": [d.model_dump() for d in docs],
+        "total_results": len(docs),
+    }
+
+
+class AgentRequest(BaseModel):
+    scenario_id: Optional[str] = None
+    transaction: Optional[Transaction] = None
+
+
+@app.post("/api/agent/investigate", response_model=AgentInvestigation)
+async def investigate_transaction(req: AgentRequest):
+    """Runs an autonomous multi-step agentic investigation on a transaction."""
+    if req.transaction:
+        txn = req.transaction
+    elif req.scenario_id:
+        try:
+            txn = get_scenario_by_id(req.scenario_id)
+        except KeyError:
+            raise HTTPException(status_code=404, detail=f"Scenario '{req.scenario_id}' not found.")
+    else:
+        txn = get_scenario_by_id("TXN_FALSE_POSITIVE_001")
+
+    service = get_model_service()
+    feats = txn.model_dump()
+    risk = service.predict_risk(feats)
+    risk_sigs, trust_sigs = service.calculate_contributions(feats)
+    raw_ints = evaluate_counterfactuals(feats, risk.score, risk.decision)
+    rec, _ = select_best_intervention(raw_ints, risk.score, risk.decision)
+
+    return await run_investigation(
+        transaction=txn,
+        risk=risk,
+        risk_signals=risk_sigs,
+        trust_signals=trust_sigs,
+        recommendation=rec,
+    )

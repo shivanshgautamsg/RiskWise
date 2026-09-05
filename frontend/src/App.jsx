@@ -12,6 +12,8 @@ import StreamSimulationModal from './components/StreamSimulationModal';
 import RiskCopilotDrawer from './components/RiskCopilotDrawer';
 import ExecutiveDossierModal from './components/ExecutiveDossierModal';
 import ShortcutsHelpModal from './components/ShortcutsHelpModal';
+import AgenticInvestigatorModal from './components/AgenticInvestigatorModal';
+import LLMSettingsModal from './components/LLMSettingsModal';
 import { AlertCircle, RefreshCw, Activity, ShieldCheck, TrendingUp, Clock, Bot, Target } from 'lucide-react';
 
 const API_BASE = ''; // proxied via vite to http://127.0.0.1:8000
@@ -45,6 +47,8 @@ export default function App() {
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isDossierOpen, setIsDossierOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isAgenticOpen, setIsAgenticOpen] = useState(false);
+  const [isLLMSettingsOpen, setIsLLMSettingsOpen] = useState(false);
 
   const [isCustomScenario, setIsCustomScenario] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -127,6 +131,9 @@ export default function App() {
       } else if (e.key === '2' && scenarios[1]) {
         setSelectedScenarioId(scenarios[1].id);
         setIsCustomScenario(false);
+      } else if (e.key === '3' && scenarios[2]) {
+        setSelectedScenarioId(scenarios[2].id);
+        setIsCustomScenario(false);
       } else if (e.key.toLowerCase() === 'l') {
         toggleTheme();
       } else if (e.key.toLowerCase() === 's') {
@@ -143,6 +150,10 @@ export default function App() {
         setIsAuditOpen((prev) => !prev);
       } else if (e.key.toLowerCase() === 't') {
         setIsDrawerOpen((prev) => !prev);
+      } else if (e.key.toLowerCase() === 'g') {
+        setIsAgenticOpen((prev) => !prev);
+      } else if (e.key.toLowerCase() === 'o') {
+        setIsLLMSettingsOpen((prev) => !prev);
       } else if (e.key === '?' || (e.shiftKey && e.key === '/')) {
         setIsShortcutsOpen((prev) => !prev);
       }
@@ -191,6 +202,8 @@ export default function App() {
         onOpenCopilot={() => setIsCopilotOpen(true)}
         onOpenDossier={() => setIsDossierOpen(true)}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
+        onOpenAgenticInvestigator={() => setIsAgenticOpen(true)}
+        onOpenLLMSettings={() => setIsLLMSettingsOpen(true)}
         onToggleTheme={toggleTheme}
         theme={theme}
         onRefresh={handleRefresh}
@@ -284,6 +297,8 @@ export default function App() {
             recommendation={analysisData.recommendation}
             explanation={analysisData.explanation}
             selectedIntervention={activeIntervention}
+            transaction={analysisData.transaction}
+            risk={analysisData.risk}
             onExecuteSimulation={() => {}}
           />
         </>
@@ -353,6 +368,18 @@ export default function App() {
       <ShortcutsHelpModal
         isOpen={isShortcutsOpen}
         onClose={() => setIsShortcutsOpen(false)}
+      />
+
+      <AgenticInvestigatorModal
+        isOpen={isAgenticOpen}
+        onClose={() => setIsAgenticOpen(false)}
+        scenarioId={isCustomScenario ? 'CUSTOM' : selectedScenarioId}
+        transaction={analysisData?.transaction}
+      />
+
+      <LLMSettingsModal
+        isOpen={isLLMSettingsOpen}
+        onClose={() => setIsLLMSettingsOpen(false)}
       />
     </div>
   );

@@ -13,6 +13,8 @@ import {
   Sun,
   Moon,
   HelpCircle,
+  Brain,
+  Sparkles,
 } from 'lucide-react';
 
 export default function Header({
@@ -27,6 +29,8 @@ export default function Header({
   onOpenCopilot,
   onOpenDossier,
   onOpenShortcuts,
+  onOpenAgenticInvestigator,
+  onOpenLLMSettings,
   onToggleTheme,
   theme,
   onRefresh,
@@ -69,6 +73,28 @@ export default function Header({
           </select>
           <ChevronDown className="w-4 h-4 select-chevron" />
         </div>
+
+        {/* Agentic AI Investigator */}
+        <button
+          className="btn btn-secondary"
+          onClick={onOpenAgenticInvestigator}
+          title="Autonomous Agentic Investigation (Hotkey: G)"
+          style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#8b5cf6', background: 'rgba(139,92,246,0.06)' }}
+        >
+          <Brain className="w-3.5 h-3.5" />
+          <span>Agent</span>
+        </button>
+
+        {/* LLM Brain Hub */}
+        <button
+          className="btn btn-secondary"
+          onClick={onOpenLLMSettings}
+          title="OmniRoute LLM Brain Hub (Hotkey: O)"
+          style={{ borderColor: 'rgba(245,158,11,0.4)', color: '#f59e0b', background: 'rgba(245,158,11,0.06)' }}
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Brain</span>
+        </button>
 
         {/* Lethal Feature Buttons */}
         <button

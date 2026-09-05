@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, AlertOctagon, Sparkles, Shield, Play, Check } from 'lucide-react';
+import { CheckCircle2, AlertOctagon, Sparkles, Shield, Play, Check, Cpu } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function RecommendationHero({
   recommendation,
   explanation,
   selectedIntervention,
+  transaction,
+  risk,
   onExecuteSimulation,
 }) {
   const [executed, setExecuted] = useState(false);
@@ -18,6 +20,9 @@ export default function RecommendationHero({
   if (!recommendation) return null;
 
   const isDecline = recommendation.is_decline_maintained;
+  const formattedAmount = transaction?.amount
+    ? transaction.amount.toLocaleString('en-IN')
+    : (isDecline ? '91,000' : '38,500');
 
   const handleExecute = () => {
     setExecuted(true);
@@ -46,8 +51,27 @@ export default function RecommendationHero({
             )}
           </div>
           <div>
-            <div className="rec-section-label">
-              Optimal Next Action • Decision Intelligence
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <span className="rec-section-label">
+                Optimal Next Action • Decision Intelligence
+              </span>
+              <span className="badge" style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--primary-500)', border: '1px solid rgba(59,130,246,0.3)', fontSize: '0.62rem' }}>
+                <Cpu className="w-3 h-3" />
+                Vulcan Glass-Box Layer
+              </span>
+              <span
+                className="badge"
+                style={{
+                  background: isDecline ? 'rgba(239,68,68,0.14)' : 'rgba(16,185,129,0.14)',
+                  color: isDecline ? 'var(--risk-500)' : 'var(--trust-500)',
+                  border: `1px solid ${isDecline ? 'rgba(239,68,68,0.35)' : 'rgba(16,185,129,0.35)'}`,
+                  fontSize: '0.65rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {isDecline ? `🛡️ Loss Averted: ₹${formattedAmount}` : `💰 GMV Rescued: +₹${formattedAmount}`}
+              </span>
             </div>
             <div className="rec-action-name">
               {recommendation.action_title}
@@ -106,6 +130,17 @@ export default function RecommendationHero({
           <div className="narrative-label" style={{ color: 'var(--trust-500)' }}>Mitigating Trust Anchor</div>
           <p className="narrative-text" style={{ color: 'var(--trust-500)', fontWeight: 600 }}>
             {explanation?.mitigating_factor || 'Historical account tenure & success volume'}
+          </p>
+        </div>
+
+        <div className="narrative-block">
+          <div className="narrative-label" style={{ color: isDecline ? 'var(--risk-500)' : 'var(--trust-500)' }}>
+            {isDecline ? 'Fraud Exposure Containment' : 'False-Positive Remediation'}
+          </div>
+          <p className="narrative-text" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+            {isDecline
+              ? `Confirmed high-risk attack. Halting ₹${formattedAmount} exposure protects merchant chargeback threshold.`
+              : `Step-Up preserves ₹${formattedAmount} GMV (Benchmark yield: +₹38.5k net GMV per 100 false declines).`}
           </p>
         </div>
       </div>

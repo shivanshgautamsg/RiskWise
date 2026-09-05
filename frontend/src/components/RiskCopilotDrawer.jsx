@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, Bot, User, Sparkles, HelpCircle, ShieldAlert, Cpu } from 'lucide-react';
+import { X, Send, Bot, User, Sparkles, HelpCircle, ShieldAlert, Cpu, BookOpen } from 'lucide-react';
 
 export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transaction }) {
   const [messages, setMessages] = useState([
@@ -12,6 +12,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
         'What is the minimum amount for auto-approval?',
         'Why is customer age immutable?',
       ],
+      llm_model: 'deepseek-r1',
     },
   ]);
   const [input, setInput] = useState('');
@@ -102,7 +103,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                 RiskWise AI Copilot
               </h2>
               <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
-                Zero-hallucination natural language risk intelligence
+                Zero-hallucination natural language risk intelligence • RAG Augmentation
               </p>
             </div>
           </div>
@@ -162,7 +163,7 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                   </div>
                 )}
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', width: '100%' }}>
                   <div
                     style={{
                       background: isUser ? 'var(--primary-600)' : 'var(--bg-surface-elevated)',
@@ -176,10 +177,46 @@ export default function RiskCopilotDrawer({ isOpen, onClose, scenarioId, transac
                   >
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+                        __html: msg.content
+                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          .replace(/\n/g, '<br/>'),
                       }}
                     />
+
+                    {/* Model provenance badge */}
+                    {!isUser && msg.llm_model && (
+                      <div style={{ marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.62rem', color: 'var(--text-muted)' }}>
+                        <Cpu className="w-2.5 h-2.5" />
+                        <span>Brain: <strong className="mono" style={{ color: 'var(--primary-500)' }}>{msg.llm_model}</strong></span>
+                      </div>
+                    )}
                   </div>
+
+                  {/* RAG Regulatory Citations */}
+                  {!isUser && msg.rag_citations && msg.rag_citations.length > 0 && (
+                    <div style={{
+                      background: 'rgba(139,92,246,0.06)',
+                      border: '1px solid rgba(139,92,246,0.2)',
+                      borderRadius: '8px',
+                      padding: '0.4rem 0.6rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.25rem',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.65rem', fontWeight: 700, color: '#8b5cf6' }}>
+                        <BookOpen className="w-3 h-3" />
+                        <span>Regulatory Citations ({msg.rag_citations.length})</span>
+                      </div>
+                      {msg.rag_citations.map((c, cIdx) => (
+                        <div key={cIdx} style={{ fontSize: '0.64rem', color: 'var(--text-secondary)' }}>
+                          <span className="badge" style={{ background: 'rgba(139,92,246,0.12)', color: '#8b5cf6', border: '1px solid rgba(139,92,246,0.25)', fontSize: '0.58rem', marginRight: '0.3rem' }}>
+                            {c.source_reference}
+                          </span>
+                          {c.title}
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Suggested Followups */}
                   {msg.suggested_followups && msg.suggested_followups.length > 0 && (

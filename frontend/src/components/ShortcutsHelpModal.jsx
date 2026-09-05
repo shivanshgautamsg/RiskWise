@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Keyboard, Zap, Target, Activity, Bot, FileText, Code, Sliders, Sun } from 'lucide-react';
+import { X, Keyboard, Zap, Target, Activity, Bot, FileText, Code, Sliders, Sun, Brain, Sparkles } from 'lucide-react';
 
 export default function ShortcutsHelpModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -7,11 +7,14 @@ export default function ShortcutsHelpModal({ isOpen, onClose }) {
   const shortcuts = [
     { key: '1', label: 'False Positive Scenario', desc: 'Load ₹38.5k UPI false positive remediation demo' },
     { key: '2', label: 'True Fraud Scenario', desc: 'Load ₹91k UPI true fraud containment demo' },
+    { key: '3', label: 'Borderline Review Scenario', desc: 'Load ₹12.4k UPI edge-case sensitivity demo' },
+    { key: 'G', label: 'Agentic AI Investigator', desc: '5-step autonomous investigation agent with tool calls & RAG' },
+    { key: 'O', label: 'OmniRoute LLM Brain Hub', desc: 'Multi-model gateway switching (DeepSeek, Claude, GPT, Gemini)' },
     { key: 'L', label: 'Toggle Light / Dark Mode', desc: 'Switch between Obsidian Dark and Clean Slate Light themes' },
     { key: 'S', label: 'Live Risk Sandbox', desc: 'Open interactive parameter slider playground' },
     { key: 'B', label: 'Breakeven Sensitivity', desc: 'Inspect analytical decision boundaries & roots' },
     { key: 'M', label: 'Macro Stream Replay', desc: 'Replay 50-txn live batch GMV recovery simulation' },
-    { key: 'C', label: 'AI Risk Copilot', desc: 'Grounded natural language analyst assistant' },
+    { key: 'C', label: 'AI Risk Copilot', desc: 'Grounded natural language analyst assistant with RAG' },
     { key: 'R', label: 'Executive RCA Dossier', desc: 'Printable merchant dispute & incident report' },
     { key: 'A', label: 'Audit JSON / Webhook', desc: 'View raw decision telemetry & Razorpay payload' },
     { key: 'T', label: 'Model Transparency', desc: 'View learned weights, AUC metrics, and immutability' },
